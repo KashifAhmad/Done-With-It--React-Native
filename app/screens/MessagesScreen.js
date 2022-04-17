@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   FlatList,
@@ -12,15 +12,15 @@ import Constants from "expo-constants";
 
 import colors from "../config/colors";
 import AppListItemSeparator from "../componenets/AppListItemSeparator";
-import { useState } from "react/cjs/react.production.min";
 import ListItemDeleteAction from "../componenets/ListItemDeleteAction";
+import Screen from "../componenets/Screen";
 
 const initialMessages = [
   {
     id: 1,
     title: "T1",
     description: "D1",
-    image: require("../assets/chair.jpg"),
+    image: require("../assets/background.jpg"),
   },
   {
     id: 2,
@@ -30,15 +30,17 @@ const initialMessages = [
   },
 ];
 function MessagesScreen(props) {
-    const [messages, setMessages] = useState(initialMessages)
-    const [refreshing, setRefreshing] = useState(false)
-    const handleDelete = (message) => {
-        setMessages(messages.filter((m) => m.id !== message.id))
+  const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
 
-    }
+  const handleDelete = (message) => {
+    // Delete the message from messages
+    setMessages(messages.filter((m) => m.id !== message.id));
+  };
   return (
-    <SafeAreaView style={styles.screen}>
+    <Screen>
       <FlatList
+        style={styles.container}
         data={messages}
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
@@ -46,30 +48,31 @@ function MessagesScreen(props) {
             title={item.title}
             subtitle={item.description}
             image={item.image}
-            onPress={() => console.log("Item pressed", item)}
+            onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
-                <ListItemDeleteAction onPress={() => handleDelete(item)} />
-              )}
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
           />
         )}
         ItemSeparatorComponent={AppListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-            setMessages([
-              {
-                id: 2,
-                title: "T2",
-                description: "D2",
-                image: require("../assets/chair.jpg"),
-              },
-            ]);
-          }}
-          />
-    </SafeAreaView>
+          setMessages([
+            {
+              id: 2,
+              title: "T2",
+              description: "D2",
+              image: require("../assets/jacket.jpeg"),
+            },
+          ]);
+        }}
+      />
+    </Screen>
   );
 }
 const styles = StyleSheet.create({
-  screen: {
+  container: {
+    height: "100%",
     paddingTop: Constants.StatusBarHeight,
   },
 });
