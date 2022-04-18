@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
+import CategoryPickerItem from "../components/CategoryPickerItem";
 import {
   AppForm,
   AppFormField as AFF, //alias
-  AppFormPicker as Picker,
+  AppFormPicker,
   SubmitButton,
 } from "../components/forms";
 import Screen from "../components/Screen";
@@ -16,9 +17,15 @@ const validationSchema = Yup.object().shape({
   category: Yup.object().required().nullable().label("Category"),
 });
 const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Camera", value: 3 },
+  { label: "Furniture", value: 1, backgroundColor: "#fc5c65", icon: "lamp" },
+  { label: "Clothing", value: 2, backgroundColor: "green", icon: "shoe-formal" },
+  { label: "Camera", value: 3, backgroundColor: "blue", icon: "camera" },
+  { label: "Games", value: 4, backgroundColor: "yellow", icon: "cards" },
+  { label: "Movies & Music", value: 5, backgroundColor: "purple", icon: "cards" },
+  { label: "Books", value: 6, backgroundColor: "pink", icon: "book" },
+  
+  { label: "Other", value: 7, backgroundColor: "black", icon: "cards" },
+
 ];
 function ListEditScreen() {
   return (
@@ -38,9 +45,17 @@ function ListEditScreen() {
           keyboardType="numeric"
           maxLength={8}
           name="price"
+          width={120}
           placeholder="Price"
         />
-        <Picker items={categories} name="category" placeholder="Category" />
+        <AppFormPicker
+          items={categories}
+          PickerItemComponent={CategoryPickerItem}
+          name="category"
+          numberOfColumns={3}
+          placeholder="Category"
+          width="50%"
+        />
         <AFF
           maxLength={255}
           multiline

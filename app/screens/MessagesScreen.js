@@ -7,13 +7,10 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import AppListItem from "../componenets/AppListItem";
-import Constants from "expo-constants";
+import { AppListItem, AppListItemSeparator, ListItemDeleteAction } from "../components/lists";
 
-import colors from "../config/colors";
-import AppListItemSeparator from "../componenets/AppListItemSeparator";
-import ListItemDeleteAction from "../componenets/ListItemDeleteAction";
-import Screen from "../componenets/Screen";
+import Constants from "expo-constants";
+import Screen from "../components/Screen";
 
 const initialMessages = [
   {
@@ -26,7 +23,7 @@ const initialMessages = [
     id: 2,
     title: "T2",
     description: "D2",
-    image: require("../assets/jacket.jpeg"),
+    image: require("../assets/jacket.jpg"),
   },
 ];
 function MessagesScreen(props) {
@@ -62,7 +59,7 @@ function MessagesScreen(props) {
               id: 2,
               title: "T2",
               description: "D2",
-              image: require("../assets/jacket.jpeg"),
+              image: require("../assets/jacket.jpg"),
             },
           ]);
         }}

@@ -3,8 +3,8 @@ import { Text, } from "react-native";
 
 
 
-function AppText({ children, style }) {
-  return <Text style={[style]}>{children}</Text>;
+function AppText({ children, style, ...rest }) {
+  return <Text style={[style, ]}{...rest}>{children}</Text>;
 }
 
 export default AppText;

@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-import Screen from "./app/components/Screen";
-import AppPicker from "./app/components/AppPicker";
-import AppTextInput from "./app/components/AppTextInput";
-import LoginScreen from "./app/screens/LoginScreen";
+import React from "react";
+import AppText from "./app/components/AppText";
+import MessagesScreen from "./app/screens/MessagesScreen";
 import ListEditScreen from "./app/screens/ListEditScreen";
-
 export default function App() {
-  return (
-  <ListEditScreen/>
-  );
+  return <ListEditScreen />;
 }

@@ -1,12 +1,12 @@
 import React from "react";
-import AppListItem from "../components/AppListItem";
+import AppListItem from "../components/lists/AppListItem";
 import Screen from "../components/Screen";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import colors from "../config/colors";
 import AppIcon from "../components/AppIcon";
 
-import AppListItemSeparator from "../components/AppListItemSeparator";
+import AppListItemSeparator from "../components/lists/AppListItemSeparator";
 const menuItems = [
   {
     title: "My Listings",
@@ -30,7 +30,7 @@ function AccountScreen(props) {
         <AppListItem
           title={"Kashif Ahmad"}
           subtitle="programmingwithkashif@gmail.com"
-          image={require("../assets/jacket.jpeg")}
+          image={require("../assets/jacket.jpg")}
         />
       </View>
       <View style={styles.container} />
@@ -56,7 +56,7 @@ function AccountScreen(props) {
       <AppListItem
         title={"Log Out"}
         IconComponent={
-          <AppIcon name={"logout"} backgroundColor={colors.primary}></AppIcon>
+          <AppIcon name={"logout"} backgroundColor={"#adadad"}></AppIcon>
         }
       />
     </Screen>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   screen: {
+    marginTop: 20,
     backgroundColor: colors.light,
   },
 });
