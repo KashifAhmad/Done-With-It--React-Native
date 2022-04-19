@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import FormImagePicker from "../components/FormImagePicker";
 import {
   AppForm,
   AppFormField as AFF, //alias
@@ -15,17 +16,27 @@ const validationSchema = Yup.object().shape({
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select at least one image"),
 });
 const categories = [
   { label: "Furniture", value: 1, backgroundColor: "#fc5c65", icon: "lamp" },
-  { label: "Clothing", value: 2, backgroundColor: "green", icon: "shoe-formal" },
+  {
+    label: "Clothing",
+    value: 2,
+    backgroundColor: "green",
+    icon: "shoe-formal",
+  },
   { label: "Camera", value: 3, backgroundColor: "blue", icon: "camera" },
   { label: "Games", value: 4, backgroundColor: "yellow", icon: "cards" },
-  { label: "Movies & Music", value: 5, backgroundColor: "purple", icon: "cards" },
+  {
+    label: "Movies & Music",
+    value: 5,
+    backgroundColor: "purple",
+    icon: "cards",
+  },
   { label: "Books", value: 6, backgroundColor: "pink", icon: "book" },
-  
-  { label: "Other", value: 7, backgroundColor: "black", icon: "cards" },
 
+  { label: "Other", value: 7, backgroundColor: "black", icon: "cards" },
 ];
 function ListEditScreen() {
   return (
@@ -36,10 +47,12 @@ function ListEditScreen() {
           price: "",
           description: "",
           category: null,
+          images: [],
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+        <FormImagePicker name="images" />
         <AFF maxLength={255} name="title" placeholder="Title" />
         <AFF
           keyboardType="numeric"
