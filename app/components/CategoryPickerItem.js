@@ -12,12 +12,14 @@ import AppText from "./AppText";
 function CategoryPickerItem({ item, onPress }) {
   return (
     <View style={styles.container}>
-      <AppIcon
-        backgroundColor={item.backgroundColor}
-        name={item.icon}
-        size={80}
-      ></AppIcon>
-      <AppText style={styles.label}>{item.label}</AppText>
+      <TouchableOpacity onPress={onPress}>
+        <AppIcon
+          backgroundColor={item.backgroundColor}
+          name={item.icon}
+          size={80}
+        ></AppIcon>
+        <AppText style={styles.label}>{item.label}</AppText>
+      </TouchableOpacity>
     </View>
   );
 }
