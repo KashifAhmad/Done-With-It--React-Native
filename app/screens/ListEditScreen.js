@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/FormImagePicker";
+import listingsApi from "../api/listings";
 import {
   AppForm,
   AppFormField as AFF, //alias
@@ -10,7 +11,8 @@ import {
   SubmitButton,
 } from "../components/forms";
 import Screen from "../components/Screen";
-// import UseLocation from "../hooks/UseLocation";
+import useLocation from "../hooks/UseLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -40,8 +42,21 @@ const categories = [
   { label: "Other", value: 7, backgroundColor: "black", icon: "cards" },
 ];
 function ListEditScreen() {
-  // const location = UseLocation();
+  const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
+  const handleSubmit = async (listing) => {
+    setProgress(0.1);
+    setUploadVisible(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => console.log(progress)
+    );
+    setUploadVisible(false);
+    if (!result.ok) return alert("Could not add listing");
+    alert("Success");
+  };
   return (
     <Screen style={styles.container}>
       <AppForm
@@ -52,7 +67,7 @@ function ListEditScreen() {
           category: null,
           images: [],
         }}
-        onSubmit={(values) => console.log("location")}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
